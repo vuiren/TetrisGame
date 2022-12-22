@@ -29,13 +29,14 @@ namespace TetrisGame.UpdateSystems
 
         private void MoveAllFrozenCellsDown(GameState state, int startY)
         {
-            for (int y = startY; startY > 0; startY--)
+            for (int y = startY - 1; y > 0; y--)
             {
                 var cells = state.allCells.Where(x => x.y == y && !x.moving);
 
                 foreach (var cell in cells)
                 {
                     cell.y++;
+                    state.cellsToRedraw.Add(new Vector2Int(cell.x, cell.y));
                 }
             }
         }
